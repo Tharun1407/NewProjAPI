@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NewProjApi.Data;
+using NewProjApi.Repositories;
+using System.Reflection;
 
 namespace NewProjApi
 {
@@ -20,6 +22,10 @@ namespace NewProjApi
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalks"));
             });
+
+            builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
